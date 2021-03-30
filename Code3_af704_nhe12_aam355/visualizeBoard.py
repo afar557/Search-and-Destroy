@@ -1,13 +1,13 @@
 import pygame
 
-def visualizeBoard (grid, label):
+def visualizeBoard (grid, label, target):
     dimension = len(grid)
     # Define colors for maze
 
     # forested - 3
     GREEN = (0, 102, 51)
     # maze of caves - 2
-    DARKGRAY = (64, 64, 64)
+    DARKGRAY = (96, 96, 96)
     # hilly - 1
     LIGHTGRAY = (160, 160, 160)
     # flat - 0
@@ -68,7 +68,17 @@ def visualizeBoard (grid, label):
     
         # Limit to 60 frames per second
         clock.tick(60)
-    
+
+        # Adds target to the board
+        for x in range(dimension):
+            for y in range(dimension):
+                if x == target[0] and y == target[1]: 
+                    text=font.render("x", True, (0, 0, 0))        
+                    rect=text.get_rect()
+                    rect.x=(y*(WIDTH+MARGIN)) + MARGIN
+                    rect.y=(x*(WIDTH+MARGIN)) + MARGIN
+                    screen.blit(text, rect)
+        
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
          

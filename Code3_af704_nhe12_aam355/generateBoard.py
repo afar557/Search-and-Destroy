@@ -10,3 +10,8 @@ def generateBoard(dimension):
         board.append(col)
     return board
 
+def assignTarget(dimension):
+    xValue = random.randint(0,dimension)
+    yValue = random.randint(0,dimension)
+    
+    return (xValue, yValue)
