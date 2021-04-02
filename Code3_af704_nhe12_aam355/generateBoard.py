@@ -11,7 +11,7 @@ def generateBoard(dimension):
     return board
 
 def assignTarget(dimension):
-    xValue = random.randint(0,dimension)
-    yValue = random.randint(0,dimension)
+    xValue = random.randint(0,dimension-1)
+    yValue = random.randint(0,dimension-1)
     
     return (xValue, yValue)

@@ -1,0 +1,4 @@
+1. Summing the belief matrix in a for loop gives us a slightly innacurate value
+2. Should we round> And if so to how many decimal places?
+3. How should we know if the target is there
+4. Difference between distance traveled and number of searches (is distance traveled = manhattan distance from starting point to target?)
