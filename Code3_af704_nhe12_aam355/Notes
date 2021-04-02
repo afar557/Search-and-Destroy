@@ -1,4 +1,5 @@
 1. Summing the belief matrix in a for loop gives us a slightly innacurate value
-2. Should we round> And if so to how many decimal places?
-3. How should we know if the target is there
-4. Difference between distance traveled and number of searches (is distance traveled = manhattan distance from starting point to target?)
+2. Should we round And if so to how many decimal places?
+3. Difference between distance traveled and number of searches (is distance traveled = manhattan distance from starting point to target?)
+4. What is the difference between the formula for question 1 and 2
+5. How do you update the belief state in agent 2 (our idea is to create a new matrix and incorporate FNR into it)
