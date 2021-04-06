@@ -5,3 +5,5 @@
     the mahattan distance between every cell in the path
 4. What is the difference between the formula for question 1 and 2
 5. How do you update the belief state in agent 2 (our idea is to create a new matrix and incorporate FNR into it)
+
+From agent 2 will we be picking highest probability or the lowest from the equation that considers the positive rate and the belief state?
