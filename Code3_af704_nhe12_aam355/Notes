@@ -1,5 +1,7 @@
 1. Summing the belief matrix in a for loop gives us a slightly innacurate value
+    doesn't matter
 2. Should we round And if so to how many decimal places?
 3. Difference between distance traveled and number of searches (is distance traveled = manhattan distance from starting point to target?)
+    the mahattan distance between every cell in the path
 4. What is the difference between the formula for question 1 and 2
 5. How do you update the belief state in agent 2 (our idea is to create a new matrix and incorporate FNR into it)
