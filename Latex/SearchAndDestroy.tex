@@ -122,9 +122,13 @@ Given the observations up to time$_{t}$, the belief state captures the current p
 P(Target found in Cell$_{i}$$|$Observations$_{t}$)?
 \end{center}
 \end{problem}
-\\\\
 \smallskip
 \begin{solution}
+P( Target in Cell$_{i}$ $|$ Observations$_{t}$ )
+\\\\
+= \ P( Target in Cell$_{i}$ $\land$ Search of i is successful $|$ Observations$_{t}$ )
+\\\\
+= \ (1 - False Negative Rate of Cell$_{i}$) * Belief[Cell$_{i}$]
 \end{solution}
 
 \smallskip
@@ -143,7 +147,11 @@ Consider the following situation.  Your agent is dropped into the map at a rando
 \end{problem}
 \smallskip
 \begin{solution}
-On average, after running the program with an average of 10 with 10 different 50 by 50 mazes the improved agent was better. 
+On average, after running the program with an average of 10 with 10 different 50 by 50 mazes, we found that the improved agent was better. \\
+The improved had the least score out of all 3 agents. \\
+Basic Agent 1: -insert number here-\\
+Basic Agent 2: -insert number here-\\
+Improved Agent: -insert number here-\\
 \end{solution}
 
 \smallskip
@@ -157,13 +165,6 @@ Design and implement an improved agent and show that it beats both basic agents.
 
 \smallskip
 
-
-\begin{problem}
-\end{problem}
-\smallskip
-\begin{solution}
-\end{solution}
-
 \textbf{Work Distribution}
 \\
 The work is our own and not copied or taken from any other students. 
@@ -172,11 +173,11 @@ To work on this project we would meet up over video calls daily and discuss prob
 \\\\
 The report was done similarly. We each took on a plot and a question to complete on our own. We then met to complete the rest as a group over video call. 
 \\
-$Asma$ $Makhdoom:$ Performance Part 1 and Efficiency
+$Asma$ $Makhdoom:$ 
 \\
-$Aamna$ $Farooq:$ Performance Part 2, Global Information and Better Decisions
+$Aamna$ $Farooq:$ 
 \\
-$Nada$ $Elshamaa:$ Representation, Inference and Decisions
+$Nada$ $Elshamaa:$ 
 \\
 \smallskip
 
