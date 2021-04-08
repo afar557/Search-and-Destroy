@@ -15,3 +15,21 @@ def assignTarget(dimension):
     yValue = random.randint(0,dimension-1)
     
     return (xValue, yValue)
+
+def moveTarget(prevTarget, dimension):
+    x,y = prevTarget
+    while(true):
+        direction = random.randint(1,4)
+        if direction == 1:
+            x+=1
+        elif direction == 2:
+            x-=1
+        elif direction == 3:
+            y+=1
+        elif direction == 4:
+            y-=1
+        
+        if x>0 and y<dimension-1:
+            break
+    return (x,y)
+    
