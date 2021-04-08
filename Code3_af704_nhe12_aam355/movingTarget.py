@@ -3,7 +3,7 @@ import random
 from agent1 import manhattanDistance, getFNR, getTotalProb, normalizeCells, updateBelief
 from generateBoard import moveTarget
 
-def within5(target, current):
+def within5Func(target, current):
     distanceFromTarget = manhattanDistance(target, current)
     if distanceFromTarget <= 5:
         return True
@@ -18,8 +18,11 @@ def getMaxCell(beliefMatrix, currentCell, within5):
         for j in range(len(beliefMatrix)):
             # curr = (1 - getFNR(grid[i][j])) * beliefMatrix[i][j]
             curr = beliefMatrix[i][j]
+            # print("within 5:", within5, "distance:", manhattanDistance((i,j), currentCell))
             if (within5 == True and manhattanDistance((i,j), currentCell) <= 5) or (within5 == False and manhattanDistance((i,j), currentCell) > 5):
+                # print("in first if")
                 if curr > maxProb or ( curr == maxProb and manhattanDistance(maxInd, currentCell) > manhattanDistance((i,j), currentCell) ):
+                    # print("in second if")
                     maxProb = curr
                     maxInd = (i,j)
 
@@ -69,16 +72,19 @@ def agent1EC(grid, target):
 
         # this is a fail, so move the target
         target = moveTarget(target, dimension)
-        within5 = within5(target, (x,y))
+        within5 = within5Func(target, (x,y))
 
         # Update the belief matrix
         beliefMatrix = updateBelief(beliefMatrix, (x,y), grid)
 
         # Pick min from belief matrix and enqueue it
-        nextCell = getMaxCell(beliefMatrix, (x,y))
+        nextCell = getMaxCell(beliefMatrix, (x,y), within5)
         queue.append(nextCell)
 
+        # print("x:",x,"y:",y,"nextCell:",nextCell)
         totalDistance += manhattanDistance((x,y), nextCell)
+        # print("HERE")
+        # return None
 
 # agent2 including a moving target
 def agent2EC(grid, target):
@@ -124,7 +130,7 @@ def agent2EC(grid, target):
 
         # this is a fail, so move the target
         target = moveTarget(target, dimension)
-        within5 = within5(target, (x,y))
+        within5 = within5Func(target, (x,y))
 
         # Update the belief matrix
         beliefMatrix = updateBelief(beliefMatrix, (x,y), grid)
@@ -189,7 +195,7 @@ def agent3EC(grid, target):
 
         # this is a fail, so move the target
         target = moveTarget(target, dimension)
-        within5 = within5(target, (x,y))
+        within5 = within5Func(target, (x,y))
 
         # Update the belief matrix
         beliefMatrix = updateBelief(beliefMatrix, (x,y), grid)
@@ -212,3 +218,5 @@ def agent3EC(grid, target):
         queue.append(maxInd)
 
         totalDistance += manhattanDistance((x,y), maxInd)
+
+        

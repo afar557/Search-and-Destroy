@@ -18,7 +18,7 @@ def assignTarget(dimension):
 
 def moveTarget(prevTarget, dimension):
     x,y = prevTarget
-    while(true):
+    while(True):
         direction = random.randint(1,4)
         if direction == 1:
             x+=1
