@@ -79,66 +79,91 @@
 \thisheading
 
 \begin{problem}
+Given observations up to time $t$ (Observations $_{t}$), and a failure searching Cell$_{j}$(Observations$_{t+1}$= Observations$_{t}$ $\land$ Failure in Cell$_{j}$), how can Bayes’ theorem be used to efficiently update the belief state?  i.e., compute:
+\begin{center}P(Target in Cell$_{i}$$|$Observations$_{t}$ $\land$Failure in Cell$_{j}$).
+\\\\
+\end{center}
 \end{problem}
 \smallskip
 \begin{solution}
+Bayes' theorem can be used to efficiently update the belief state by deriving an equation using Bayes that we would then use to update the belief state at each time step. From the given probability, using Bayes' we knew:\\\\
+P(Target in Cell$_{i}$ $|$ Observations$_{t}$$\land$Failure in Cell$_{j}$).
+\\\\
+ = \[\frac{\text {P(Target in Cell$_{i}$ $\land$ Observations$_{t}$ $\land$ Failure in Cell $_{j}$)}}{\text{P(Observations$_{t}$ $\land$ Failure in Cell $_{j}$)}}\]
+
+\\\\
+ = \[\frac{\text {P(Observations$_{t}$) * P(Target in Cell$_{i}$ $|$ Observations$_{t}$) * P(Failure in Cell$_{j}$ $|$ Target in Cell$_{i}$ $\land$ Observations$_{t}$)}}{\text{P(Observations$_{t}$) * P(Failure in Cell$_{j}$ $|$ Observations$_{t}$)}}\]
+ 
+\\\\
+= \[\frac{\text {P(Target in Cell$_{i}$ $|$Observations$_{t}$) * P(Failure in Cell$_{j}$ $|$ Observations$_{t}$)}}{\text{P(Failure in Cell$_{j}$ $|$ Observations$_{t}$)}}\]
+
+\\\\
+P(Failure in Cell$_{j}$ $|$ Target in Cell$_{i}$)
+\\ if j!= i: P(Failure in Cell$_{j}$ $|$ Target in Cell$_{i}$) = 1
+\\ if j=i: P(Failure in Cell$_{j}$ $|$ Target in Cell$_{i}$) = false negative rate
+
+\\ from this we are able to derive the following: 
+\\ 
+P(Target in Cell$_{i}$ $|$ Observations$_{t}$) = Current Probability in Belief State\\
+P(Failure in Cell$_{j}$ $|$ Target in Cell$_{i}$) = False Negative Rate\\
+P(Failure in Cell$_{j}$ $|$ Observations$_{t}$) = Normalizing Factor\\
+\\ 
+which gives us the equation:
+\\ 
+= \[\frac{\text {Belief[i][j] = (Belief[i][j] * False Negative Rate)}}{\text{[Normalizing Factor(New Total Probability of Belief State)]}}\]
+
 \end{solution}
 
 \smallskip
 
 \begin{problem}
+Given the observations up to time$_{t}$, the belief state captures the current probability the target is in a given cell.  What is the probability that the target will be found in Cell$_{i}$ if it is searched:
+\begin{center}
+P(Target found in Cell$_{i}$$|$Observations$_{t}$)?
+\end{center}
 \end{problem}
 \smallskip
 \begin{solution}
+P( Target in Cell$_{i}$ $|$ Observations$_{t}$ )
+\\\\
+= \ P( Target in Cell$_{i}$ $\land$ Search of i is successful $|$ Observations$_{t}$ )
+\\\\
+= \ (1 - False Negative Rate of Cell$_{i}$) * Belief[Cell$_{i}$]
 \end{solution}
 
 \smallskip
 
 \begin{problem}
+Consider the following situation.  Your agent is dropped into the map at a random location and wants to find the target as quickly as possible.  At every time step, the agent can either a) search the current cell the agent is in, or b) move to one of the immediate neighbors (up/down/left/right).  We can consider the following basic agents:
+\\\\
+ – Basic Agent 1:  Iteratively travel to the cell with the highest probability of containing the target, searchthat cell.  Repeat until target is found.
+ \\
+ –Basic Agent 2:  Iteratively travel to the cell with the highest probability of finding the target within that cell, search that cell.  Repeat until the target is found.
+ \\\\
+ $For$ $both$ $agents,$ $ties$ $in$ $probability$ $between$ $cells$ $should$ $be$ $broken$ $based$ $on$ $shortest$ $distance$ $(minimal$ $manhattan$ $distance),$  $and$  $broken$  $at$  $random$  $between$  $cells$  $with$  $equal$  $probability$  $and$  $equal$  $shortest$  $distance.$
+ The  final performance  of  an  agent  is  taken  to  be  ‘total  distance  traveled’  +  ‘number  of  searches’,  and  we  want  this number to be as small as possible.
+ \\\\
+ Generate 10 maps, and play through each map (with random target location and initial agent location each time) 10 times with each agent.  Which agent is better, on average?
 \end{problem}
 \smallskip
 \begin{solution}
+On average, after running the program with an average of 10 with 10 different 50 by 50 mazes, we found that the improved agent was better. \\
+The improved had the least score out of all 3 agents. \\
+Basic Agent 1: 53255.61\\
+Basic Agent 2: 36542.92\\
+Improved Agent: 14104.75\\
 \end{solution}
 
 \smallskip
 
 \begin{problem}
+Design and implement an improved agent and show that it beats both basic agents.  Describe your algorithm, and why it is more effective than the other two.  Given world enough, and time, how would you make your agent even better?
 \end{problem}
 \smallskip
 \begin{solution}
 \end{solution}
 
 \smallskip
-
-\begin{problem}
-\end{problem}
-\smallskip
-\begin{solution}
-\end{solution}
-
-\smallskip
-
-\begin{problem}
-\end{problem}
-\smallskip
-\begin{solution}
-\end{solution}
-
-\smallskip
-
-\begin{problem}
-\end{problem}
-\smallskip
-\begin{solution}
-\end{solution}
-
-\smallskip
-
-\begin{problem}
-\end{problem}
-\smallskip
-\begin{solution}
-\end{solution}
 
 \textbf{Work Distribution}
 \\
@@ -148,11 +173,11 @@ To work on this project we would meet up over video calls daily and discuss prob
 \\\\
 The report was done similarly. We each took on a plot and a question to complete on our own. We then met to complete the rest as a group over video call. 
 \\
-$Asma$ $Makhdoom:$ Performance Part 1 and Efficiency
+$Asma$ $Makhdoom:$ 
 \\
-$Aamna$ $Farooq:$ Performance Part 2, Global Information and Better Decisions
+$Aamna$ $Farooq:$ 
 \\
-$Nada$ $Elshamaa:$ Representation, Inference and Decisions
+$Nada$ $Elshamaa:$ 
 \\
 \smallskip
 
