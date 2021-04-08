@@ -108,9 +108,9 @@ P(Target in Cell$_{i}$ $|$ Observations$_{t}$) = Current Probability in Belief S
 P(Failure in Cell$_{j}$ $|$ Target in Cell$_{i}$) = False Negative Rate\\
 P(Failure in Cell$_{j}$ $|$ Observations$_{t}$) = Normalizing Factor\\
 \\ 
-which gives us the equation:
+which gives us the equation to be able to update the belief state:
 \\ 
-= \[\frac{\text {Belief[i][j] = (Belief[i][j] * False Negative Rate)}}{\text{[Normalizing Factor(New Total Probability of Belief State)]}}\]
+Belief[i][j] = \[\frac{\text {Belief[i][j] * False Negative Rate}}{\text{Normalizing Factor(New Total Probability of Belief State)}}\]
 
 \end{solution}
 
@@ -129,6 +129,8 @@ P( Target in Cell$_{i}$ $|$ Observations$_{t}$ )
 = \ P( Target in Cell$_{i}$ $\land$ Search of i is successful $|$ Observations$_{t}$ )
 \\\\
 = \ (1 - False Negative Rate of Cell$_{i}$) * Belief[Cell$_{i}$]
+\\\\
+For each cell in the grid, we calculate the above formula using the belief state we derived in question 1. We maintain a running maximum for each cell and ultimately choose to search the cell with that maximum value. If there are any ties in maximum value we break those ties using minimum Manhattan distance and if there ties with distance, we choose randomly.
 \end{solution}
 
 \smallskip
@@ -147,11 +149,11 @@ Consider the following situation.  Your agent is dropped into the map at a rando
 \end{problem}
 \smallskip
 \begin{solution}
-On average, after running the program with an average of 10 with 10 different 50 by 50 mazes, we found that the improved agent was better. \\
-The improved had the least score out of all 3 agents. \\
+On average, after running the program with an average of 10 with 10 different 50 by 50 mazes, we found that agent 2 was better than agent 1. \\
+The improved had the least score:\\
 Basic Agent 1: 53255.61\\
 Basic Agent 2: 36542.92\\
-Improved Agent: 14104.75\\
+% Improved Agent: 14104.75\\
 \end{solution}
 
 \smallskip
@@ -160,8 +162,29 @@ Improved Agent: 14104.75\\
 Design and implement an improved agent and show that it beats both basic agents.  Describe your algorithm, and why it is more effective than the other two.  Given world enough, and time, how would you make your agent even better?
 \end{problem}
 \smallskip
-\begin{solution}
+\begin{solution} \hfill
+
+We modeled our improved agent similar to Agent 2 but we added an extra component of distance into our algorithm. This way, instead of solely using probability, we are balancing probability and distance to decide which cell to search next. For each cell we calculate the probability using the formula from Agent 2 and divide that by the Manhattan distance of the current cell to that particular cell. We keep a running maximum of this value and choose to search the cell that has the highest value. \\\\
+This has proved to be highly effective compared to Agent 1 and Agent 2. On average, after running the program with an average of 10 with 10 different 50 by 50 mazes, we found that the improved agent performed the best out of the 3 algorithms. \\
+Basic Agent 1: 53255.61\\
+Basic Agent 2: 36542.92\\
+Improved Agent: 14104.75\\\\
+Our improved Agent is more effective than the other Agents because instead of solely using probability, we are balancing probability and distance to decide which cell to search next.\\\\
+If we had enough time and resources, we would implement an improved Agent that also looks further time steps into the future. This would make the algorithm more effective because it could anticipate future steps and reduce overall travel distance since distance usually costs more than searches.
+
 \end{solution}
+
+\smallskip
+
+\textbf{Bonus: A Moving Target} \\
+In this section, the target is no longer stationary, and can move between neighboring cells (up/down/left/right). Each time you perform a search, if you fail to find the target, the target will move to a neighboring cell (with uniform probability for each). However, all is not lost - every time you search a cell, you are now given two pieces of information instead of one: first, you are told whether or not the search was successful (same false negative rates as before); and if the search was unsuccessful, you are told whether or not the target is within Manhattan distance 5 of your current location. \\
+• Adapt Basic Agents 1 and 2 to this new situation and extra information. What modifications to your probabilities did this require? Are they still able to find the target? Which one is better?\\
+• Adapt your Improved Agent to this new situation and extra information. What modifications does your algorithm require? Is it still able to find the target? Does it still beat Basic Agents 1 and 2? \\
+
+In order to implement the moving target, depending on whether or not the target is within Manhattan distance 5 of the current location, we change how we pick the maximum cell. If we know that the target is also within Manhattan distance 5 of the current cell we take the maximum probability of cells that are within Manhattan distance 5. Otherwise, we only consider cells have a Manhattan distance that is greater than 5. We do this because we are guaranteed that the location of the target is either within Manhattan distance of 5 or not. We do the same for Agent 2 and Improved Agent as well. In all cases, the agents are always able to find the target. The improved Agent performs the best out of the 3. For example, we ran the 3 (moving) agents on the same maze of size 10 by 10: \\
+Agent 1: 10582 \\
+Agent 2: 6284 \\
+Agent 3: 1071 \\
 
 \smallskip
 
